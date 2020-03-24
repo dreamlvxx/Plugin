@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.tb.plugin.xxname'
 android {
     compileSdkVersion 28
     defaultConfig {
