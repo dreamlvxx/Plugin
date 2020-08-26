@@ -5,6 +5,7 @@ import com.android.build.api.transform.*
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.internal.pipeline.TransformManager
 import com.asm.LifecycleClassVisitor
+import com.asm.XXConfig
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils
@@ -23,8 +24,12 @@ import static org.objectweb.asm.ClassReader.EXPAND_FRAMES
 
 class LifecyclePlugin extends Transform implements Plugin<Project> {
 
+    Project mProject
+
     @Override
     void apply(Project project) {
+        mProject = project
+        project.extensions.create("XXConfig", XXConfig.class)
         //registerTransform
         def android = project.extensions.getByType(AppExtension)
         android.registerTransform(this)
@@ -74,6 +79,7 @@ class LifecyclePlugin extends Transform implements Plugin<Project> {
         def cost = (System.currentTimeMillis() - startTime) / 1000
         println '--------------- LifecyclePlugin visit end --------------- '
         println "LifecyclePlugin cost ： $cost s"
+        println mProject.XXConfig.name
     }
 
     /**
