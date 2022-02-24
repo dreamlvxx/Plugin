@@ -24,10 +24,10 @@ publishing {
         }
     }
     //插件存储库
-    repositories {
-        maven {
-            // 生成的插件位置
-            url = uri('../repo')
-        }
-    }
+//    repositories {
+//        maven {
+//            // 生成的插件位置
+//            url = uri('../repo')
+//        }
+//    }
 }
