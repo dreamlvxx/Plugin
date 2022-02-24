@@ -4,12 +4,12 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-//apply plugin: 'com.tb.plugin.xxname'
-//
-//XXConfig{
-//    name = "xxxxxxxxname"
-//    url = "xxxxxxxxxxxxurl"
-//}
+apply plugin: 'com.tb.plugin.xxname'
+
+XXConfig{
+    name = "xxxxxxxxname"
+    url = "xxxxxxxxxxxxurl"
+}
 android {
     compileSdkVersion 28
     defaultConfig {
