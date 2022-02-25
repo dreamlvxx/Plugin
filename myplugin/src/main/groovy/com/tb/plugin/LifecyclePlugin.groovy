@@ -91,6 +91,7 @@ class LifecyclePlugin extends Transform implements Plugin<Project> {
             //列出目录所有文件（包含子文件夹，子文件夹内文件）
             directoryInput.file.eachFileRecurse { File file ->
                 def name = file.name
+                println 'file name = ' + name
                 if (checkClassFile(name)) {
                     println '----------- deal with "class" file <' + name + '> -----------'
                     ClassReader classReader = new ClassReader(file.bytes)
@@ -138,6 +139,7 @@ class LifecyclePlugin extends Transform implements Plugin<Project> {
                 ZipEntry zipEntry = new ZipEntry(entryName)
                 InputStream inputStream = jarFile.getInputStream(jarEntry)
                 //插桩class
+                println 'entryName = ' + entryName
                 if (checkClassFile(entryName)) {
                     //class文件处理
                     println '----------- deal with "jar" class file <' + entryName + '> -----------'
@@ -171,9 +173,11 @@ class LifecyclePlugin extends Transform implements Plugin<Project> {
      */
     static boolean checkClassFile(String name) {
         //只处理需要的class文件
-        return (name.endsWith(".class") && !name.startsWith("R\$")
-                && !"R.class".equals(name) && !"BuildConfig.class".equals(name)
-                && "android/support/v4/app/FragmentActivity.class".equals(name))
+        return (name.endsWith(".class")
+                && !name.startsWith("R\$")
+                && "R.class" != name
+                && "BuildConfig.class" != name
+                && "TargetChangeClass.class" == name)
     }
 
 }
